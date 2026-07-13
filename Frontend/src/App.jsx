@@ -1,30 +1,16 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import ProductList from "../pages/ProductList";
+import ProductDetails from "../pages/ProductDetails";
 
-function App() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(()=>{
-    fetch('http://127.0.0.1:8000/api/products')
-    .then(response => response.json())
-    .then(data => setProducts(data))
-    .catch(error => console.log(error));
-  },[]);
-  return (
-    <div className='w-full h-screen bg-gray-800' >
-      <h1 className='text-3xl font-bold text-white'>Products list</h1>
-      <div className='mx-auto p-4'>
-            {products.map(product => (
-                    <div key={product.id} className='text-white bg-black p-4 rounded shadow mb-4'>
-                    <h2 className='font-bold '>{product.name}</h2>
-                    <p>{product.description}</p>
-                    <p>{product.price}</p>
-                  </div>
-                  
-            ))}
-      </div>
-    </div>
-  )
+function App(){
+  return(
+    <Router>
+      <Routes>
+        <Route path="/" element= {<ProductList />}/>
+        <Route path="/product/:id" element = {<ProductDetails />}/>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App;
+export default  App;
