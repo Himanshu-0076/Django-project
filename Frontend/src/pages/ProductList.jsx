@@ -1,16 +1,18 @@
 import { useEffect,useState } from "react";
 import ProductCard from "../components/ProductCards.jsx";
 
+
 function ProductList(){
     const [products, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+   
+
     const baseUrl = import.meta.env.VITE_DJANGO_BASE_URL;
 
     useEffect(()=> {
         fetch(`${baseUrl}/api/products`)
             .then((response) => {
-                console.log(response)
                 if( !response.ok ){
                     throw new Error("Failed to fetch Product");
                 }
@@ -27,11 +29,11 @@ function ProductList(){
     },[]);
 
     if(loading) { 
-        return <div>loading ...</div>
+        return <div className="text-center ">loading ...</div>
     }
-    if (error){
-        return <div>Error:{error}</div>
-    }
+    // if (error){
+    //     return <div className="text-center">Error:{error}</div>
+    // }
 
     return (
         <div className="min-h-screen bg-gray-100">
