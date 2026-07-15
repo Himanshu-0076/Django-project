@@ -1,5 +1,6 @@
 import { useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { authFetch } from "../utils/auth";
 import { useCart } from "../context/CartContext";
 
 
@@ -29,7 +30,7 @@ function CheckOutPage(request){
         setLoading(true);
         setMessage('');
         try{
-            const res = await fetch(`${baseUrl}/api/orders/create/`,{
+            const res = await authFetch(`${baseUrl}/api/orders/create/`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
